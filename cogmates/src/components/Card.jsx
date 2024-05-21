@@ -1,12 +1,18 @@
 import { useState } from "react";
 
-export function Card() {
+export function Card({allowFlipCard, addCardFlipped, coupleId, content}) {
     const [active, setActive] = useState(false);
+    const [matched, setMatched] = useState(false);
+    const [idCouple, setIdCouple] = useState(coupleId);
 
     function flipCard(e) {
         const currentTarget = e.currentTarget;
-        console.log(currentTarget);
-        setActive(!active);
+
+        if(!allowFlipCard(currentTarget)){
+            return;
+        }
+        setActive(true);
+        addCardFlipped(currentTarget);
     }
 
     return (
@@ -16,12 +22,10 @@ export function Card() {
         >
             <div className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d]  ${active ? '[transform:rotateY(180deg)]' : ''} border border-sky-700`}>
                 <div className="absolute inset-0 [backface-visibility:hidden] bg-slate-400 rounded-xl">
-                    <h1>Front Card</h1>
-                    <p>face parte card</p>
+                    
                 </div>
-                <div className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] rounded-xl">
-                    <h2>back Card</h2>
-                    <p>this is a back card</p>
+                <div className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] rounded-xl flex flex-col items-center justify-center text-center p-2">
+                    <p className="font-semibold">{content}</p>
                 </div>
             </div>
         </div>
