@@ -1,8 +1,10 @@
 import { Board } from "./components/Board";
-// import { useCard } from "./components/hooks/useCard";
+
+
 
 function App() {
-    // const {cardArray} = useCard();
+
+
     return (
         <section className="w-screen min-h-screen bg-white flex flex-col justify-center items-center">
             <h1 className="text-3xl font-bold mb-8">CogMates Game</h1>

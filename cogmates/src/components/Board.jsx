@@ -1,83 +1,67 @@
 import { Card } from "./Card";
-import { useState, useEffect } from "react";
+import { useCard } from "./hooks/useCard";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 export function Board() {
+    const [cards, setCards] = useState(useCard());
     const [cardsFlipped, setCardsFlipped] = useState([]);
     const [cardsMatched, setCardsMatched] = useState([]);
+    const [isBoardLocked, setIsBoardLocked] = useState(false);
+    const [moves, setMoves] = useState(0);
+    console.log(cards);
 
-    const allowFlipCard = (card) => {
-        if (cardsFlipped.length === 2 || cardsFlipped.includes(card)) {
-            return false;
+    function handleCard(id) {
+        if (isBoardLocked) return;
+
+        const currentCard = cards.find((card) => card.id === id);
+
+        if (!currentCard.flipped && !currentCard.matched) {
+            currentCard.flipped = true;
+
+            const newFlippedCards = [...cardsFlipped, currentCard];
+            setCardsFlipped(newFlippedCards);
+
+            if (newFlippedCards.length === 2) {
+                setIsBoardLocked(true);
+                console.log(isBoardLocked);
+
+                checkMatch(newFlippedCards);
+                setCardsFlipped([]);
+                setMoves(moves + 1);
+            }
+            setCards([...cards]);
         }
-        return true;
-    };
+    }
 
-    const checkMatch = () => {
-        console.log("entro checkMatch");
-        console.log(cardsFlipped[0].coupleId);
-        
-        if (cardsFlipped[0].coupleId === cardsFlipped[1].coupleId) {
-            setCardsMatched(...cardsMatched, cardsFlipped[0], cardsFlipped[1]);
+    const checkMatch = (newFlippedCards) => {
+        const [firstCard, secondCard] = newFlippedCards;
+
+        if (firstCard.coupleId === secondCard.coupleId) {
+            firstCard.matched = true;
+            secondCard.matched = true;
+            setCardsMatched([...cardsMatched, firstCard, secondCard]);
+            console.log(cardsMatched);
+            setIsBoardLocked(false);
         } else {
-            cardsFlipped[0].setActive(false);
-            cardsFlipped[1].setActive(false);
-        }
-
-    };
-
-    const addFlipCard = (card) => {
-        setCardsFlipped([...cardsFlipped, card]);
-        console.log("add card");
-        if (cardsFlipped.length === 2) {
-            console.log("checkMatch");
-            checkMatch();
+            setTimeout(() => {
+                firstCard.flipped = false;
+                secondCard.flipped = false;
+                setCards([...cards]);
+                setIsBoardLocked(false);
+            }, 700);
         }
     };
-
-    useEffect(() => {
-        if (cardsFlipped.length === 2) {
-            // console.log("checkMatch");
-            checkMatch();
-        }
-    }, [cardsFlipped])
-
-    // const createCards = () => {
-    //     // console.log(shuffledArray );
-    //     return cardArray.map((card) => (
-    //         <Card
-    //             key={card.id}
-    //             allowFlipCard={allowFlipCard}
-    //             addCardFlipped={addFlipCard}
-    //             coupleId={card.coupleId}
-    //             content={card.content}
-    //         />
-    //     ));
-    // };
-
-    const cards = [
-        { id: 1, coupleId: 1, content: "Kevin" },
-        { id: 2, coupleId: 1, content: "Kevin" },
-        { id: 3, coupleId: 2, content: "Isaac" },
-        { id: 4, coupleId: 2, content: "Isaac" },
-        { id: 5, coupleId: 3, content: "Marioneta" },
-        { id: 6, coupleId: 3, content: "Marioneta" },
-        { id: 7, coupleId: 4, content: "Hugo" },
-        { id: 8, coupleId: 4, content: "Hugo" },
-    ];
 
     return (
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] max-w-screen-xl gap-4">
-            {cards.map((card) => (
-                <Card
-                    key={card.id}
-                    allowFlipCard={allowFlipCard}
-                    addCardFlipped={addFlipCard}
-                    coupleId={card.coupleId}
-                    content={card.content}
-                />
-            ))}
-        </div>
+        <>
+            <h2 className="text-2xl font-semibold mb-4">Moves: {moves}</h2>
+            <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] max-w-screen-xl gap-4">
+                {cards.map((card) => (
+                    <Card key={card.id} card={card} handleCard={handleCard} />
+                ))}
+            </div>
+        </>
     );
 }
 
