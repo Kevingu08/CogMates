@@ -1,14 +1,19 @@
 import { Card } from "./Card";
-import { useCard } from "./hooks/useCard";
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useShuffle } from "../hooks/useShuffle";
+import { useState, useEffect } from "react";
+import { CARDS } from "../lib/card";
+import confetti from "canvas-confetti";
+import { Modal } from "./Modal";
 
 export function Board() {
-    const [cards, setCards] = useState(useCard());
+    const [cards, setCards] = useState(useShuffle(CARDS));
     const [cardsFlipped, setCardsFlipped] = useState([]);
     const [cardsMatched, setCardsMatched] = useState([]);
     const [isBoardLocked, setIsBoardLocked] = useState(false);
     const [moves, setMoves] = useState(0);
+    const [isGameWon, setIsGameWon] = useState(false);
+    let newCardsMatched = [];
+
     console.log(cards);
 
     function handleCard(id) {
@@ -32,6 +37,16 @@ export function Board() {
             }
             setCards([...cards]);
         }
+        console.log(cardsMatched.length);
+
+        if (newCardsMatched.length === CARDS.length) {
+			setIsGameWon(true);
+            confetti({
+                particleCount: 250,
+                spread: 250,
+            });
+            resetGame(1000);
+        }
     }
 
     const checkMatch = (newFlippedCards) => {
@@ -41,7 +56,8 @@ export function Board() {
             firstCard.matched = true;
             secondCard.matched = true;
             setCardsMatched([...cardsMatched, firstCard, secondCard]);
-            console.log(cardsMatched);
+            newCardsMatched = [...cardsMatched, firstCard, secondCard];
+
             setIsBoardLocked(false);
         } else {
             setTimeout(() => {
@@ -49,22 +65,40 @@ export function Board() {
                 secondCard.flipped = false;
                 setCards([...cards]);
                 setIsBoardLocked(false);
-            }, 700);
+            }, 600);
         }
+    };
+
+    const resetGame = (time) => {
+        setTimeout(() => {
+            cards.map(
+                (card) => ((card.flipped = false), (card.matched = false))
+            );
+            setCardsMatched([]);
+            setCardsFlipped([]);
+            setMoves(0);
+            const shuffledCards = useShuffle(CARDS);
+            setCards(shuffledCards);
+        }, time);
     };
 
     return (
         <>
+            {
+                isGameWon && <Modal setWonGame={setIsGameWon}/>
+            }
             <h2 className="text-2xl font-semibold mb-4">Moves: {moves}</h2>
-            <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] max-w-screen-xl gap-4">
+            <div className="grid grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] sm:max-w-screen-xl gap-4">
                 {cards.map((card) => (
                     <Card key={card.id} card={card} handleCard={handleCard} />
                 ))}
             </div>
+            <button
+                className="p-4 bg-sky-600 rounded-lg text-white font-semibold mt-6 hover:bg-sky-700"
+                onClick={() => resetGame(100)}
+            >
+                Reset Game
+            </button>
         </>
     );
 }
-
-Board.propTypes = {
-    cardArray: PropTypes.array,
-};
