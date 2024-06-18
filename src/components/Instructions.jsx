@@ -12,7 +12,7 @@ export function Instructions() {
 
   return (
     <div
-      className="w-screen h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      className="p-4 w-screen min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
       style={{ backgroundImage: backgroundImage }}
     >
       <div className="bg-white bg-opacity-80 dark:bg-zinc-800 dark:bg-opacity-80 shadow-md rounded-lg p-4 max-w-md text-center">

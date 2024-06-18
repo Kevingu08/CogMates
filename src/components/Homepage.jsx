@@ -40,16 +40,16 @@ export function Homepage() {
             style={{ backgroundImage: "url('/imgs/Magos.png')" }}
         >
             <div className="bg-zinc-800 bg-opacity-50 p-8 rounded-full text-center">
-                <h1 className="text-4xl font-bold mb-4 text-white">
+                <h1 className=" font-bold mb-4 text-white text-2xl lg:text-4xl">
                     Welcome to CogMates!
                 </h1>
-                <p className="text-lg mb-8 text-white">
+                <p className="text-lg text-white">
                     Explore this awesome world in which you'll learn a lot about
                     English
                 </p>
             </div>
 
-            <div className="flex flex-col items-center gap-4 mt-8">
+            <div className="flex flex-col items-center gap-4 mt-2 lg:mt-8">
                 <NavLink
                     className={`bg-blue-500 hover:bg-blue-700 text-white text-xl font-bold w-40 p-4 text-center rounded transition-transform duration-500 transform-gpu ${
                         startButtonScale === 1 ? "scale-105" : "scale-90"
@@ -70,14 +70,6 @@ export function Homepage() {
                 >
                     Instructions
                 </NavLink>
-                {/* <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold w-40 p-4 text-center rounded transition-transform transform-gpu hover:scale-105"
-                    onClick={() => {
-                        playButtonSound();
-                    }}
-                >
-                    Exit
-                </button> */}
             </div>
 
             <button
@@ -87,7 +79,7 @@ export function Homepage() {
                 {musicPlaying ? "Pause Music" : "Play Music"}
             </button>
 
-            <footer className="text-center text-black font-bold mt-8 absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <footer className="text-center text-black font-bold mt-8 absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full">
                 Developed by Kevin Guido, Isaac Corella, Jose Zamora, and Hugo
                 Ugalde
             </footer>
