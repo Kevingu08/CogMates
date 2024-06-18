@@ -85,31 +85,31 @@ export function Board() {
     };
 
     return (
-        <section className="min-h-screen bg-white flex flex-col sm:justify-center mt-6 sm:mt-0 sm:items-center">
+        <section className="p-4 min-h-screen bg-white flex flex-col sm:justify-center mt-6 sm:mt-0 lg:items-center lg:p-0">
             {isGameWon && <Modal setWonGame={setIsGameWon} />}
-            <h2 className="text-2xl font-semibold mb-4">Moves: {moves}</h2>
-            <div className="grid sm:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] sm:max-w-screen-xl gap-4">
+            <h2 className="text-2xl font-semibold mb-4 text-center">Moves: {moves}</h2>
+            <div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))]  lg:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] lg:max-w-screen-xl gap-4">
                 {cards.map((card) => (
                     <Card key={card.id} card={card} handleCard={handleCard} />
                 ))}
             </div>
-            <div className="flex gap-8 mb-10">
-                
-                
+            <div className=" flex gap-8 mb-10 flex-col w-full items-center lg:flex-row lg:w-auto mt-10">
+                <div className="flex gap-4 lg:w-auto">
                     <NavLink
-                        className="py-4 px-10 border border-red-600 rounded-lg font-semibold mt-6 hover:bg-red-600 hover:text-white"
+                        className="text-center py-4 px-10 border border-red-600 rounded-lg font-semibold mt-6 hover:bg-red-600 hover:text-white"
                         to={ROUTE_PATHS.HOME}
                         onClick={() => resetGame(100)}
                     >
                         Exit
                     </NavLink>
-                
-                <button
-                    className="p-4 bg-sky-600 rounded-lg text-white font-semibold mt-6 hover:bg-sky-700"
-                    onClick={() => resetGame(100)}
-                >
-                    Reset Game
-                </button>
+
+                    <button
+                        className="p-4 bg-sky-600 rounded-lg text-white font-semibold mt-6 hover:bg-sky-700"
+                        onClick={() => resetGame(100)}
+                    >
+                        Reset Game
+                    </button>
+                </div>
             </div>
         </section>
     );

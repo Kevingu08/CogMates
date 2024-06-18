@@ -6,7 +6,7 @@ export function Card({ card, handleCard }) {
     return (
         <div
             onClick={() => handleCard(card.id)}
-            className="group h-48 w-48 [perspective:1000px]"
+            className="group h-48 w-48 [perspective:1000px] m-auto"
         >
             <div
                 className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d]  ${
