@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { CARDS } from "../lib/card";
 
 export function Homepage() {
     const audioRef = useRef(null);
@@ -33,6 +34,7 @@ export function Homepage() {
         buttonSound.currentTime = 0;
         buttonSound.play();
     };
+
 
     return (
         <div

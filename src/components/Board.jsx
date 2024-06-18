@@ -14,6 +14,11 @@ export function Board() {
     const [isBoardLocked, setIsBoardLocked] = useState(false);
     const [moves, setMoves] = useState(0);
     const [isGameWon, setIsGameWon] = useState(false);
+    console.log(cards);
+
+    useEffect(() => {
+        resetGame(0);
+    }, []);
 
     useEffect(() => {
         if (cardsMatched.length === CARDS.length) {
@@ -73,40 +78,44 @@ export function Board() {
 
     const resetGame = (time) => {
         setTimeout(() => {
-            const resetCards = cards.map((card) => ({
+            const shuffledCards = useShuffle(CARDS).map((card) => ({
                 ...card,
                 flipped: false,
                 matched: false,
             }));
-            setCards(resetCards);
+            setCards(shuffledCards);
             setCardsMatched([]);
             setCardsFlipped([]);
             setMoves(0);
             setIsGameWon(false);
-            const shuffledCards = useShuffle(CARDS);
-            setCards(shuffledCards);
+            console.log("reset");
         }, time);
     };
 
     return (
         <div
-            className="bg-zinc-900 text-white dark:text-black min-h-screen w-screen flex flex-col items-center justify-center bg-cover bg-center relative"
+            className="bg-zinc-900 text-white dark:text-black min-h-screen flex flex-col lg:items-center justify-center bg-cover bg-center"
             style={{ backgroundImage: "url('/imgs/magic.png')" }}
         >
-            <section className="p-4 min-h-screen  flex flex-col sm:justify-center mt-6 sm:mt-0 lg:items-center lg:p-0 bg-['/imgs/night-sky-cartoon.jpg']">
+            <section className="p-4 min-h-screen mt-6 sm:mt-0 lg:items-center lg:p-0">
                 {isGameWon && <Modal setWonGame={setIsGameWon} />}
-                <h2 className="text-4xl font-semibold mb-4 text-center text-white ">Moves: {moves}</h2>
-                <div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))]  lg:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] lg:max-w-screen-xl gap-4">
+                <h2 className="text-4xl font-semibold mb-4 text-center text-white ">
+                    Moves: {moves}
+                </h2>
+                <div className="grid grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))]  md:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] lg:max-w-screen-xl gap-2">
                     {cards.map((card) => (
-                        <Card key={card.id} card={card} handleCard={handleCard} />
+                        <Card
+                            key={card.id}
+                            card={card}
+                            handleCard={handleCard}
+                        />
                     ))}
                 </div>
                 <div className="flex gap-8 mb-10 flex-col w-full items-center lg:flex-row lg:w-auto mt-10">
-                    <div className="flex gap-4 lg:w-auto">
+                    <div className="flex gap-4 m-auto lg:w-auto">
                         <NavLink
                             className="text-center py-4 px-10 border border-red-600 rounded-lg font-semibold mt-6 hover:bg-red-600 hover:text-white"
                             to={ROUTE_PATHS.HOME}
-                            onClick={() => resetGame(100)}
                         >
                             Exit
                         </NavLink>
