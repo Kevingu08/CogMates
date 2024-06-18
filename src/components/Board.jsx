@@ -17,7 +17,7 @@ export function Board() {
     console.log(cards);
 
     useEffect(() => {
-        resetGame(0);
+        resetGame(1000);
     }, []);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export function Board() {
                 particleCount: 250,
                 spread: 250,
             });
-            resetGame(1000);
+            resetGame(2000);
         }
     }, [cardsMatched]);
 
@@ -94,11 +94,11 @@ export function Board() {
 
     return (
         <div
-            className="bg-zinc-900 text-white dark:text-black min-h-screen flex flex-col lg:items-center justify-center bg-cover bg-center"
+            className="bg-zinc-900 relative text-white dark:text-black min-h-screen flex flex-col lg:items-center justify-center bg-cover bg-center "
             style={{ backgroundImage: "url('/imgs/magic.png')" }}
         >
             <section className="p-4 min-h-screen mt-6 sm:mt-0 lg:items-center lg:p-0">
-                {isGameWon && <Modal setWonGame={setIsGameWon} />}
+                {isGameWon && <Modal setWonGame={setIsGameWon} moves={moves} />}
                 <h2 className="text-4xl font-semibold mb-4 text-center text-white ">
                     Moves: {moves}
                 </h2>

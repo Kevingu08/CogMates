@@ -1,13 +1,14 @@
 import { NavLink } from 'react-router-dom'
 import { ROUTE_PATHS } from "../routes";
 
-export function Modal({setWonGame}) {
+export function Modal({setWonGame, moves}) {
     return (
         <>
-            <article className="z-10 w-full min-h-full absolute flex flex-col items-center justify-center">
+            <article className="z-10 w-full min-h-full absolute flex flex-col items-center justify-center left-0">
                 <div className="bg-white rounded-md p-10 text-center border border-black">
                     <div className="grid gap-2">
-                        <h2 className="text-xl font-bold">¡¡Congratulation you won!!</h2>
+                        <h2 className="text-xl font-bold">Congratulation you won!!</h2>
+                        <h3 className="text-xl"><strong>Movements:</strong> {moves}</h3>
                         <p>Would you like to play again?</p>
                     </div>
                     <div className="mt-6 w-full flex flex-col gap-4">

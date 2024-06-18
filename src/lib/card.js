@@ -1,8 +1,8 @@
 export const CARDS = [
-  { id: 1, coupleId: 1, content: "Actual", flipped: false, matched: false, language: "en"},
-  { id: 2, coupleId: 1, content: "Real", flipped: false, matched: false, language: "es"},
-  { id: 3, coupleId: 2, content: "Actual", flipped: false, matched: false, language: "es"},
-  { id: 4, coupleId: 2, content: "Current", flipped: false, matched: false, language: "en"},
+  { id: 1, coupleId: 1, content: "Actually", flipped: false, matched: false, language: "en"},
+  { id: 2, coupleId: 1, content: "En realidad", flipped: false, matched: false, language: "es"},
+  { id: 3, coupleId: 2, content: "Actualmente", flipped: false, matched: false, language: "es"},
+  { id: 4, coupleId: 2, content: "Currently", flipped: false, matched: false, language: "en"},
   { id: 5, coupleId: 3, content: "Assist", flipped: false, matched: false, language: "en" },
   { id: 6, coupleId: 3, content: "Ayudar", flipped: false, matched: false, language: "es" },
   { id: 7, coupleId: 4, content: "To attend", flipped: false, matched: false, language: "en"},
