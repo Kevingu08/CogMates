@@ -1,11 +1,25 @@
 import { PropTypes } from "prop-types";
 import { USFlag } from "../icons/USFlag";
 import { ESPFlag } from "../icons/ESPFlag";
+import { useRef } from "react";
 
 export function Card({ card, handleCard }) {
+    const buttonSoundRef = useRef(null);
+
+    const playButtonSound = () => {
+        const buttonSound = buttonSoundRef.current;
+        buttonSound.currentTime = 0;
+        buttonSound.play();
+    };
+
+    const handleButtonClick = () => {
+        handleCard(card.id);
+        playButtonSound();
+    }
+
     return (
         <div
-            onClick={() => handleCard(card.id)}
+            onClick={() => handleButtonClick()}
             className="group h-48 w-[10rem] [perspective:1000px] m-auto"
         >
             <div
@@ -26,9 +40,16 @@ export function Card({ card, handleCard }) {
                     </p>
                 </div>
             </div>
+            <audio ref={buttonSoundRef} className="hidden">
+                <source src="/audio/Menu-Selection-Click.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
         </div>
+        
     );
 }
+
+
 
 Card.propTypes = {
     card: PropTypes.object,

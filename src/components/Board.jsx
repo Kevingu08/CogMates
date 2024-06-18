@@ -17,7 +17,7 @@ export function Board() {
     console.log(cards);
 
     useEffect(() => {
-        resetGame(1000);
+        resetGame(100);
     }, []);
 
     useEffect(() => {
