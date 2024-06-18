@@ -11,12 +11,12 @@ export function Card({ card, handleCard }) {
             <div
                 className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d]  ${
                     card.flipped ? "[transform:rotateY(180deg)]" : ""
-                } border border-sky-700`}
+                } border border-purple-500`}
             >
-                <div className="absolute inset-0 [backface-visibility:hidden] bg-slate-400 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 [backface-visibility:hidden] bg-white rounded-xl overflow-hidden">
                     <img
-                        className="contain aspect-square"
-                        src="/imgs/card_img.jpeg"
+                        className="cover h-full m-auto"
+                        src="/imgs/card_img.png"
                         alt=""
                     />
                 </div>

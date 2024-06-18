@@ -85,7 +85,7 @@ export function Board() {
     };
 
     return (
-        <section className="p-4 min-h-screen bg-white flex flex-col sm:justify-center mt-6 sm:mt-0 lg:items-center lg:p-0">
+        <section className="p-4 min-h-screen bg-purple-900 flex flex-col sm:justify-center mt-6 sm:mt-0 lg:items-center lg:p-0 bg-['/imgs/night-sky-cartoon.jpg']">
             {isGameWon && <Modal setWonGame={setIsGameWon} />}
             <h2 className="text-2xl font-semibold mb-4 text-center">Moves: {moves}</h2>
             <div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))]  lg:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] lg:max-w-screen-xl gap-4">

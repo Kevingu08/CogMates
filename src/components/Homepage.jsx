@@ -20,7 +20,7 @@ export function Homepage() {
         if (musicPlaying) {
             audio.pause();
         } else {
-            audio.volume = 0.5;
+            audio.volume = 0.1;
             audio.loop = true;
             audio.currentTime = 0;
             audio.play();
