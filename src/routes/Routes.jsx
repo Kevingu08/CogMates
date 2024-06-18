@@ -12,7 +12,6 @@ export function Routes(){
             <Route path={ROUTE_PATHS.INSTRUCTION} element={<Instructions />}></Route>
             <Route path={ROUTE_PATHS.BOARD} element={<Board />}></Route>
             <Route path={ROUTE_PATHS.NOT_FOUND} element={<Navigate to={'/'} />}></Route>
-            {/* </section > */}
         </ReactRoutes>
     )
 }

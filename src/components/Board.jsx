@@ -14,7 +14,7 @@ export function Board() {
     const [isBoardLocked, setIsBoardLocked] = useState(false);
     const [moves, setMoves] = useState(0);
     const [isGameWon, setIsGameWon] = useState(false);
-    console.log(cards);
+    // console.log(cards);
 
     useEffect(() => {
         resetGame(100);
@@ -88,7 +88,7 @@ export function Board() {
             setCardsFlipped([]);
             setMoves(0);
             setIsGameWon(false);
-            console.log("reset");
+            // console.log("reset");
         }, time);
     };
 
