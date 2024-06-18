@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { ROUTE_PATHS } from "../routes";
 
@@ -37,11 +36,6 @@ export function Instructions() {
             <strong>No Match:</strong> If the cards do not match, they will be
             turned face down again, and you will need to remember their
             positions for future attempts.
-          </li>
-          <li>
-            <strong>Timer:</strong> There is a timer that sets a time limit for
-            the game. You must find all the matching pairs before the time runs
-            out to win.
           </li>
         </ol>
         <p className="text-zinc-600 dark:text-zinc-400 mt-4">
