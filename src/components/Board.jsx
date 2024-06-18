@@ -1,9 +1,11 @@
 import { Card } from "./Card";
 import { useShuffle } from "../hooks/useShuffle";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CARDS } from "../lib/card";
 import confetti from "canvas-confetti";
 import { Modal } from "./Modal";
+import { NavLink } from "react-router-dom";
+import { ROUTE_PATHS } from "../routes";
 
 export function Board() {
     const [cards, setCards] = useState(useShuffle(CARDS));
@@ -40,7 +42,7 @@ export function Board() {
         console.log(cardsMatched.length);
 
         if (newCardsMatched.length === CARDS.length) {
-			setIsGameWon(true);
+            setIsGameWon(true);
             confetti({
                 particleCount: 250,
                 spread: 250,
@@ -83,22 +85,32 @@ export function Board() {
     };
 
     return (
-        <>
-            {
-                isGameWon && <Modal setWonGame={setIsGameWon}/>
-            }
+        <section className="min-h-screen bg-white flex flex-col sm:justify-center mt-6 sm:mt-0 sm:items-center">
+            {isGameWon && <Modal setWonGame={setIsGameWon} />}
             <h2 className="text-2xl font-semibold mb-4">Moves: {moves}</h2>
-            <div className="grid grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] sm:max-w-screen-xl gap-4">
+            <div className="grid sm:grid-cols-[repeat(auto-fill,_minmax(210px,_1fr))] sm:max-w-screen-xl gap-4">
                 {cards.map((card) => (
                     <Card key={card.id} card={card} handleCard={handleCard} />
                 ))}
             </div>
-            <button
-                className="p-4 bg-sky-600 rounded-lg text-white font-semibold mt-6 hover:bg-sky-700"
-                onClick={() => resetGame(100)}
-            >
-                Reset Game
-            </button>
-        </>
+            <div className="flex gap-8 mb-10">
+                
+                
+                    <NavLink
+                        className="py-4 px-10 border border-red-600 rounded-lg font-semibold mt-6 hover:bg-red-600 hover:text-white"
+                        to={ROUTE_PATHS.HOME}
+                        onClick={() => resetGame(100)}
+                    >
+                        Exit
+                    </NavLink>
+                
+                <button
+                    className="p-4 bg-sky-600 rounded-lg text-white font-semibold mt-6 hover:bg-sky-700"
+                    onClick={() => resetGame(100)}
+                >
+                    Reset Game
+                </button>
+            </div>
+        </section>
     );
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
+import { ROUTE_PATHS } from "../routes";
 
 export function Instructions() {
   const backgroundImage = "url('imgs/instructions-background.png')"; 
@@ -46,12 +48,13 @@ export function Instructions() {
           The game is not only fun but also helps improve your memory and
           concentration skills. Good luck!
         </p>
-        <button
-          className="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg mt-4 transform transition duration-300 ease-in-out"
+        <NavLink
+          className="bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded-lg mt-4 transform transition duration-300 ease-in-out inline-block"
           onClick={handleGoBack}
+          to={ROUTE_PATHS.HOME}
         >
           Go Back
-        </button>
+        </NavLink>
       </div>
     </div>
   );
