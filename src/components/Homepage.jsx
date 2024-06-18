@@ -81,7 +81,7 @@ export function Homepage() {
                 {musicPlaying ? "Pause Music" : "Play Music"}
             </button>
 
-            <footer className="text-center text-black font-bold mt-8 absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full">
+            <footer className="text-sm text-center text-black font-bold mt-8 absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full md:text-xl">
                 Developed by Kevin Guido, Isaac Corella, Jose Zamora, and Hugo
                 Ugalde
             </footer>
